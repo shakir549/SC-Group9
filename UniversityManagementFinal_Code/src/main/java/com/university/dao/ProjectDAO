@@ -1,0 +1,25 @@
+package com.university.dao;
+
+import com.university.model.Project;
+import com.university.model.User;
+import java.sql.*;
+
+public class ProjectDAO {
+    private static final String INSERT_PROJECT_SQL = "INSERT INTO projects (title, description, assigned_student_id, deadline) VALUES (?, ?, ?, ?)";
+    
+    // Add a project to the database
+    public boolean addProject(Project project) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PROJECT_SQL);
+            preparedStatement.setString(1, project.getTitle());
+            preparedStatement.setString(2, project.getDescription());
+            preparedStatement.setInt(3, project.getAssignedStudent().getId());  // Assuming Student is a User object
+            preparedStatement.setDate(4, new java.sql.Date(project.getDeadline().getTime()));
+            int result = preparedStatement.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src"/>
+ <classpathentry kind="lib" path="lib/mysql-connector-j-9.3.0.jar"/>
+    <classpathentry kind="output" path="bin"/>javac -cp ".;lib/mysql-connector-java-9.3.0.jar" -d bin src/main/java/com/university/Main.java
+java -cp ".;lib/mysql-connector-java-9.3.0.jar;bin" com.university.Main
+</classpath>
